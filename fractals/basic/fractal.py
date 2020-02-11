@@ -44,7 +44,7 @@ class Fractal:
         last_convergent_array = [[self.last_convergent(element) for element in row] for row in constants]
         return last_convergent_array
 
-    def plot(self):
+    def plot(self) -> None:
         """Plot the graph of the fractal."""
         last_convergent_array = np.array(self.last_convergent_array())
         plt.imshow(last_convergent_array.T, cmap='RdGy', extent=[-2.025, 0.6, -1.125, 1.125])
