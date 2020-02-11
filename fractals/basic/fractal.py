@@ -14,12 +14,16 @@ class Fractal:
     Attributes:
         iteration_limit: int - number which says how many iterations we want to go through to check
             whether the sequence is diverging.
-        accuracy: int - number of points between -2.025 and 0.6 for x, and from -1.125 to 1.125 for y,
-            which we consider in our visualization.
+        accuracy: int - number of points between real and imaginary domain endpoints which we consider
+            un our visualization.
+        real_domain: [float[ - the domain of real numbers which we explore
+        imaginary_domain: [float' - the domain of imaginary numbers which we explore (without imaginary units!)
     """
-    def __init__(self, iteration_limit: int, accuracy: int) -> None:
+    def __init__(self, iteration_limit: int, accuracy: int, real_domain: [float], imaginary_domain: [float]) -> None:
         self.iteration_limit = iteration_limit
         self.accuracy = accuracy
+        self.real_domain = real_domain
+        self.imaginary_domain = imaginary_domain
 
     def last_convergent(self, *args, **kwargs):
         """
@@ -33,8 +37,8 @@ class Fractal:
         Generate a 2D array with the numbers of the last number
         before the sequence turned out to be diverging.
         """
-        x_array = np.linspace(-2.025, 0.6, self.accuracy)
-        y_array = np.linspace(-1.125, 1.125, self.accuracy)
+        x_array = np.linspace(self.real_domain[0], self.real_domain[1], self.accuracy)
+        y_array = np.linspace(self.imaginary_domain[0], self.imaginary_domain[1], self.accuracy)
         constants = np.zeros((self.accuracy, self.accuracy), dtype=complex)
 
         for x_index in range(len(x_array)):
@@ -47,7 +51,7 @@ class Fractal:
     def plot(self) -> None:
         """Plot the graph of the fractal."""
         last_convergent_array = np.array(self.last_convergent_array())
-        plt.imshow(last_convergent_array.T, cmap='RdGy', extent=[-2.025, 0.6, -1.125, 1.125])
+        plt.imshow(last_convergent_array.T, cmap='RdGy', extent=self.real_domain + self.imaginary_domain)
         plt.xlabel = "Real part"
         plt.ylabel = "Imaginary part"
         plt.show()
