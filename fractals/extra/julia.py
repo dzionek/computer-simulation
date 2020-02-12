@@ -8,6 +8,7 @@ class Julia(Fractal):
     """Child class with the method checking whether a point belong to a Julia set."""
     def __init__(self, constant: complex, iteration_limit: int, accuracy: int,
                  real_domain: [float], imaginary_domain: [float]) -> None:
+
         self.constant = constant
         super().__init__(iteration_limit, accuracy, real_domain, imaginary_domain)
 
