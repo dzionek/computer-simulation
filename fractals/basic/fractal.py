@@ -32,7 +32,7 @@ class Fractal:
         """
         pass
 
-    def last_convergent_array(self) -> [[complex]]:
+    def last_convergent_array(self) -> [[int]]:
         """
         Generate a 2D array with the numbers of the last number
         before the sequence turned out to be diverging.
@@ -51,7 +51,6 @@ class Fractal:
     def plot(self) -> None:
         """Plot the graph of the fractal."""
         last_convergent_array = np.array(self.last_convergent_array())
-        plt.imshow(last_convergent_array.T, cmap='RdGy', extent=self.real_domain + self.imaginary_domain)
-        plt.xlabel = "Real part"
-        plt.ylabel = "Imaginary part"
-        plt.show()
+        plt.xlabel("Real part")
+        plt.ylabel("Imaginary part")
+        plt.imshow(last_convergent_array.T, cmap='RdGy', interpolation='bilinear', extent=self.real_domain + self.imaginary_domain)

@@ -36,9 +36,9 @@ class Decay:
         for row in range(len(self.matrix)):
             for column in range(len(self.matrix)):
                 # if it is undecayed
-                if self.matrix[row][column] == 1:
+                if self.matrix[row, column] == 1:
                     if self.should_decay():
-                        self.matrix[row][column] = 0
+                        self.matrix[row, column] = 0
                         self.decayed_nuclei += 1
                         self.undecayed_nuclei -= 1
 
@@ -58,7 +58,7 @@ class Decay:
         for matrix_row in range(len(self.matrix)):
             str_row = ""
             for matrix_column in range(len(self.matrix)):
-                str_row += str(self.matrix[matrix_row][matrix_column])
+                str_row += str(self.matrix[matrix_row, matrix_column])
             str_nucleide += str_row + "\n"
         return str_nucleide
 
