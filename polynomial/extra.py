@@ -1,7 +1,8 @@
 from functools import reduce
 from itertools import zip_longest
+from typing import List
 
-from polynomial.basic import Poly
+from polynomial.poly import Poly
 
 """
 This module shows my extra work with Polynomial exercise.
@@ -9,7 +10,11 @@ This module shows my extra work with Polynomial exercise.
 
 class PolyExtra(Poly):
     """Class adds extra features to the basic polynomial class."""
-    def __sub__(self, other: 'Poly instance') -> 'Poly instance':
+    def __init__(self, coefs: List[float]) -> None:
+        """Initialize polynomial with extra methods."""
+        super().__init__(coefs)
+
+    def __sub__(self, other: Poly) -> Poly:
         """Return the difference of two polynomials."""
         other_negative_coefs = list(map(lambda x: -x, other.coefs))
         zipped_list = list(zip_longest(self.coefs, other_negative_coefs, fillvalue=0))

@@ -1,50 +1,61 @@
-from itertools import zip_longest  # used in __add__ magic method
+from itertools import zip_longest
+from typing import List
 
 """
-This module was an assignment for Computer Simulation 2020.
-Mark: 5/5 points    Feedback: Excellent!
+This module is a main module of the polynomial coursework
+for Computer Simulation 2020.
 """
 
 class Poly:
     """
     Class representing polynomials.
     Attributes:
-        coefs [float]: list with coefficients of a polynomial starting from the right.
+        coefs List[float]: list with coefficients of a polynomial starting from the right.
             e.g. 1.3 - 2x^2 + 3x^3 has the list coefficient [1.3, 0, -2, 3].
     """
 
-    def __init__(self, coefs: [float]) -> None:
-        # Check if coefs is a nonempty list of numbers.
-        if Poly.validate_input(coefs):
+    def __init__(self, coefs: List[float]) -> None:
+        """Instantiate poly instance, validates the given parameter."""
+        if self._validate_input(coefs):
+            coefs = self._remove_leading_zeros(coefs)
             self.coefs = coefs
         else:
             raise TypeError("Invalid input")
 
     @staticmethod
-    def validate_input(args: [float]) -> bool:
-        """Check if the argument is a nonempty list of numbers."""
-        if (args and isinstance(args, list) and
-                all([isinstance(arg, int) or isinstance(arg, float) for arg in args])):
-            return True
+    def _validate_input(args: List[float]) -> bool:
+        """Check if the argument is a nonempty list of real numbers."""
+        return (args and isinstance(args, list)
+                and all([
+                    isinstance(arg, int)
+                    or isinstance(arg, float)
+                    for arg in args
+                ]))
+
+    @staticmethod
+    def _remove_leading_zeros(lst: List[float]) -> List[float]:
+        """Removes all leading zeros of the list"""
+        if not any(map(bool, lst)):
+            raise TypeError('Zero polynomial')
         else:
-            return False
+            while not lst[-1]:
+                del lst[-1]
+
+        return lst
 
     def order(self) -> int:
         """Return the order of a polynomial."""
-        if self.coefs != [0]:
-            return len(self.coefs) - 1
-        else:
-            raise Exception("Zero polynomial.")
+        return len(self.coefs) - 1
 
-    def __add__(self, other: 'Poly instance') -> 'Poly instance':
+    def __add__(self, other: 'Poly') -> 'Poly':
         """Return the sum of two polynomials."""
         zipped_list = list(zip_longest(self.coefs, other.coefs, fillvalue=0))
         new_coefs = list(map(sum, zipped_list))
         return Poly(new_coefs)
 
-    def derivative(self) -> 'Poly instance':
+    def derivative(self) -> 'Poly':
         """Return the derivative of a polynomial."""
-        coefs = self.coefs
+        coefs = list(self.coefs)
         if len(coefs) == 1:
             return Poly([0])
         else:
@@ -52,9 +63,9 @@ class Poly:
                 coefs[i] *= i
             return Poly(coefs[1:])
 
-    def antiderivative(self, const: float) -> 'Poly instance':
+    def antiderivative(self, const: float) -> 'Poly':
         """Return the antiderivative of a polynomial with the given integration constant."""
-        coefs = self.coefs
+        coefs = list(self.coefs)
         for i in range(len(coefs)):
             coefs[i] /= i + 1
         return Poly([const] + coefs)
@@ -79,28 +90,6 @@ class Poly:
 
         return exp_one_coefs
 
-
-def main() -> None:
-    """
-    Main function doing all that was needed for the checkpoint:
-    print given polynomials, find an order of a polynomial,
-    sum of two polynomials, the derivative and the antiderivative of the derivative.
-    """
-    poly_a = Poly([2, 0, 4, -1, 0, 6])
-    poly_b = Poly([-1, -3, 0, 4.5])
-
-    print("Polynomials are:")
-    print("P_a(x) = " + str(poly_a) + ",")
-    print("P_b(x) = " + str(poly_b) + ".")
-
-    print("The order of P_a(x) is " + str(poly_a.order()) + ".")
-    print("The sum of the two polynomials is " + str(poly_a + poly_b) + ".")
-
-    first_derivative = poly_a.derivative()
-
-    print("The first derivative of P_a(x) is " + str(first_derivative) + ".")
-    print("The antiderivative of d(P_a(x))/dx is " + str(first_derivative.antiderivative(2)) + ".")
-
-
-if __name__ == "__main__":
-    main()
+    def __eq__(self, o: 'Poly') -> bool:
+        """Two polynomials are equal if their coefficients are equal."""
+        return self.coefs == o.coefs
