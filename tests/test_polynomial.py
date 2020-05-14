@@ -60,6 +60,9 @@ class PolynomialTestCase(unittest.TestCase):
         self.assertEqual(str(self.poly_b), f'-1 - 3x + 4x^3 + {5/6}x^4 + 6x^5 + 34x^6 - 99.5x^7')
         self.assertEqual(str(self.poly_c),
                          '-5 - 32x + 3x^5 + 2x^6 + x^7 + 3x^8 - 2.123x^9 + 3x^10 + 5x^11 + 6x^12 + 9x^13')
+        self.assertEqual(str(PolyExtra([0, -1])), '-x')
+        self.assertEqual(str(PolyExtra([0, 0, 1])), 'x^2')
+        self.assertEqual(str(PolyExtra([0, -1, 2, 3, 5.5, -7])), '-x + 2x^2 + 3x^3 + 5.5x^4 - 7x^5')
 
     def test_coefs_sum(self) -> None:
         self.assertEqual(self.poly_a.coefs_sum(), 4)
@@ -74,6 +77,18 @@ class PolynomialTestCase(unittest.TestCase):
 
         from math import factorial
         self.assertEqual(PolyExtra([x for x in range(1, 101)]).coefs_product(), factorial(100))
+
+    def test_mul(self) -> None:
+        self.assertEqual(PolyExtra([1, 2, 3]) * PolyExtra([4, 5, 6, 0, 7]),
+                         PolyExtra([4, 13, 28, 27, 25, 14, 21]))
+        self.assertEqual(self.poly_a * self.poly_a,
+                         PolyExtra([1, 0, 4, -6, 12, -12, 25, -24, 16]))
+
+    def test_call(self) -> None:
+        self.assertEqual(self.poly_c(0), -5)
+        self.assertEqual(self.poly_a(-1), 10)
+
+        self.assertRaises(TypeError, lambda _: self.poly_b('foo'))
 
 
 if __name__ == '__main__':

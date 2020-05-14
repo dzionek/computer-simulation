@@ -81,14 +81,17 @@ class Poly:
         coefs_with_x = [coef + 'x^' + str(num)
                         for (num, coef) in coefs_enumerated if coef != '0']  # ['-1x^0', '1x^1', '9.3x^3']
 
-        exp_with_pluses = ' + '.join(coefs_with_x)  # '-1x^0 + 1x^1 + 9.3x^3'
+        # We add one whitespace at the beginning and end and remove them afterwards,
+        # it fix the issue when we have for instance '1x^1'
 
-        exp_zero_exponent = exp_with_pluses.replace('x^0', '')  # '-1 + 1x^1 + 9.3x^3'
-        exp_one_exponent = exp_zero_exponent.replace('x^1 ', 'x ')  # '-1 + 1x + 9.3x^3'
-        exp_better_minuses = exp_one_exponent.replace('+ -', '- ')  # '-1 + 1x + 9.3x^3'
-        exp_one_coefs = exp_better_minuses.replace(' 1x', ' x')  # '-1 + x + 9.3x^3'
+        exp_with_pluses = ' ' + ' + '.join(coefs_with_x) + ' '  # ' -1x^0 + 1x^1 + 9.3x^3 '
 
-        return exp_one_coefs
+        exp_zero_exponent = exp_with_pluses.replace('x^0', '')  # ' -1 + 1x^1 + 9.3x^3 '
+        exp_one_exponent = exp_zero_exponent.replace('x^1 ', 'x ')  # ' -1 + 1x + 9.3x^3 '
+        exp_better_minuses = exp_one_exponent.replace('+ -', '- ')  # ' -1 + 1x + 9.3x^3 '
+        exp_one_coefs = exp_better_minuses.replace(' 1x', ' x').replace(' -1x', ' -x')  # ' -1 + x + 9.3x^3 '
+
+        return exp_one_coefs[1:-1]
 
     def __eq__(self, o: 'Poly') -> bool:
         """Two polynomials are equal if their coefficients are equal."""
