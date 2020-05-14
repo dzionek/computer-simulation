@@ -2,12 +2,13 @@ import random
 import numpy as np
 
 """
-This module was an assignment for Computer Simulation 2020.
+This module contains my decay coursework
+for Computer Simulation 2020.
 """
 
 class Decay:
     """
-    Class simulating a radioactive decay of nuclei.
+    Class simulating a Monte Carlo simulation of a radioactive decay of nuclei.
     Instance attributes:
         decay_const: float - constant of nuclear decay, determines probability of decay
         matrix: np.array([[int]]) - matrix representation of nuclei
@@ -61,35 +62,3 @@ class Decay:
                 str_row += str(self.matrix[matrix_row, matrix_column])
             str_nucleide += str_row + "\n"
         return str_nucleide
-
-
-def main() -> None:
-    """Main function doing what was needed for the assignment:
-    1) Ask for input decay_const, size and timestep (suggested values for the given
-        actual constant are decay_const = 0.02775, size = 50, timestep = 0.1
-    2) Find the half-time, and print the matrix with data about decayed nuclei.
-    3) Compare the simulated half-time with the actual half-time.
-    """
-    ACTUAL_CONSTANT = 24.98
-    decay_const = float(input("Provide the decay constant [min^-1]: "))
-    size = int(input("Provide the size of the NxN array: "))
-    timestep = float(input("Provide the timestep of the decay [min]: "))
-
-    nucleide = Decay(decay_const, size, timestep)
-    initial_undecayed = nucleide.undecayed_nuclei
-    half_time = round(nucleide.find_half_time(), 2)
-    final_undecayed = nucleide.undecayed_nuclei
-
-    print("\n----------------------------------")
-    print("The final report of the simulation")
-    print("----------------------------------\n")
-    print("The visualization of the nucleide after the decay:")
-    print("\nLegend: 0 - decayed; 1 - undecayed\n")
-    print(nucleide)
-    print(f"The model started with {initial_undecayed} nuclei. After the decay {final_undecayed} of them remained.")
-    print(f"The simulation found that the half-time of this nucleide is approximately {half_time}min.")
-    print(f"The actual half-time is {ACTUAL_CONSTANT}min.")
-
-
-if __name__ == "__main__":
-    main()

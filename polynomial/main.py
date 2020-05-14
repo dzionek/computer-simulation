@@ -1,5 +1,5 @@
-from polynomial.poly import Poly
-from polynomial.extra import PolyExtra
+from poly import Poly
+from extra import PolyExtra
 
 
 def main() -> None:
