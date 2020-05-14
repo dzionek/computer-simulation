@@ -3,6 +3,13 @@ from decay import Decay
 # Decay constant of the nucleide in the assignment
 ACTUAL_CONSTANT = 24.98
 
+"""
+Suggested values for the given example (Iodine-128) are
+decay const := 0.02775 min^-1
+size := 50
+timestep := 0.01 min
+"""
+
 def main() -> None:
     """Main function printing basic and extra decay scripts"""
     print_basic()
