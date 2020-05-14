@@ -2,7 +2,7 @@ from itertools import zip_longest
 from typing import List
 
 """
-This module is a main module of the polynomial coursework
+This module contains my polynomial coursework
 for Computer Simulation 2020.
 """
 
