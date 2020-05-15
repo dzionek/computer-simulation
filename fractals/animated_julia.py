@@ -16,6 +16,7 @@ class AnimatedJulia:
     Attributes:
         anim_constant: float - constant common for all julia sets in animation,
             unique points of Julia sets are of the form anim_const * e^(i*a)
+        iter: Generator[Julia] - generator yielding all Julia sets from angle = 0 to 2pi.
     See Also:
         fractal.py for other attributes
     """
@@ -51,7 +52,7 @@ class AnimatedJulia:
     def _generate_images(self) -> List[plt.imshow]:
         """Generates the sequence of images of the animation."""
         ims = []
-        for julia in self._generate_fractal_sequence():
+        for julia in self.iter:
             ims.append([self._give_image(julia)])
         return ims
 
