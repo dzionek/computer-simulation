@@ -2,7 +2,7 @@ from matplotlib import use
 from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 
-from typing import Tuple, List, Generator
+from typing import Generator
 import numpy as np
 from copy import copy
 from math import log
@@ -59,7 +59,7 @@ class SimulatedSystem(System):
         return log(body.mass, 1.00007) + body.mass ** 0.25
 
     def _update_plot(self, _, circles: Generator[plt.Circle, None, None]) -> Generator[plt.Circle, None, None]:
-        """Updates the plot after each iteration."""
+        """Update the plot after each iteration."""
         self.next_iteration()
 
         for circle, body in zip(circles, self.bodies):
@@ -68,7 +68,7 @@ class SimulatedSystem(System):
         return circles
 
     def show_simulation(self) -> None:
-        """Shows the simulation of the system."""
+        """Show the simulation of the system."""
         use('TkAgg')
         fig = plt.figure()
         ax = plt.axes()
