@@ -56,7 +56,7 @@ class SimulatedSystem(System):
     @staticmethod
     def _find_radius(body: Body):
         """Find a convenient radius that suits best for the animation."""
-        return log(body.mass, 1.00007) + body.mass ** 0.25
+        return log(body.mass, 1.00005) + body.mass ** 0.27
 
     def _update_plot(self, _, circles: List[plt.Circle]) -> List[plt.Circle]:
         """Update the plot after each iteration."""

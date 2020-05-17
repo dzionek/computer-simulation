@@ -11,8 +11,9 @@ def main() -> None:
     """Initialize celestial bodies and display their simulation."""
     mars = Body(M_MASS, M_COLOR, M_INIT_POS, M_INIT_VEL, M_INIT_ACC, M_INIT_FORCE)
     phobos = Body(P_MASS, P_COLOR, P_INIT_POS, P_INIT_VEL, P_INIT_ACC, P_INIT_FORCE)
+    deimos = Body(D_MASS, D_COLOR, D_INIT_POS, D_INIT_VEL, D_INIT_ACC, D_INIT_FORCE)
 
-    display_simulation(mars, phobos)
+    display_simulation(mars, phobos, deimos)
 
 
 def display_simulation(*bodies: Body) -> None:
