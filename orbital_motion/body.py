@@ -45,13 +45,13 @@ class Body:
         """Visual representation of a body instance."""
         return f'Body with mass {self.mass}, position {self.position}, and velocity {self.velocity}'
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'Body') -> bool:
         """
         Two bodies are equal when they have the same mass.
         This condition is sufficient in our simulation.
         """
         return self.mass == other.mass
 
-    def __ne__(self, other):
+    def __ne__(self, other: 'Body') -> bool:
         """Opposite of __eq__."""
         return self.mass != other.mass

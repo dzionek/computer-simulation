@@ -28,7 +28,7 @@ class SimulatedSystem(System):
     bodies : ndarray[Body]
         Bodies that belong to the system.
     """
-    def __init__(self, *bodies: Body):
+    def __init__(self, *bodies: Body) -> None:
         """Initialize the animated system."""
         super().__init__(*bodies)
 
@@ -54,7 +54,7 @@ class SimulatedSystem(System):
         self.bodies = np.array(new_bodies)
 
     @staticmethod
-    def _find_radius(body: Body):
+    def _find_radius(body: Body) -> float:
         """Find a convenient radius that suits best for the animation."""
         return log(body.mass, 1.00005) + body.mass ** 0.27
 
