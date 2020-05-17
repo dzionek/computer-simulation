@@ -9,7 +9,7 @@ from math import log
 
 from body import Body
 from system import System
-from sim_constants import TIME_STEP, GRAVITY
+from sim_constants import *
 
 """
 Module with self-contained class of a celestial system which will be simulated.
@@ -82,10 +82,10 @@ class SimulatedSystem(System):
             ax.add_patch(circle)
 
         ax.axis('scaled')
-        ax.set_xlim(-2e7, 2e7)
-        ax.set_ylim(-1.2e7, 1.2e7)
-        ax.set_facecolor('#071a38')
-        plt.title('Simulation of the given system.')
+        ax.set_xlim(*X_LIMITS)
+        ax.set_ylim(*Y_LIMITS)
+        ax.set_facecolor(BACKGROUND_COLOR)
+        plt.title(PLOT_TITLE)
 
         ani = FuncAnimation(fig, self._update_plot, interval=10, blit=True, fargs=(circles,))
         plt.show()
