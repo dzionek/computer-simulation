@@ -9,7 +9,7 @@ from math import log
 
 from body import Body
 from system import System
-from sim_constants import *
+from sim_constants import GRAVITY, TIME_STEP, X_LIMITS, Y_LIMITS, PLOT_TITLE, BACKGROUND_COLOR
 
 """
 Module with self-contained class of a celestial system which will be simulated.
