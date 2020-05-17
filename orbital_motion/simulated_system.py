@@ -2,7 +2,7 @@ from matplotlib import use
 from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 
-from typing import Generator
+from typing import List
 import numpy as np
 from copy import copy
 from math import log
@@ -20,8 +20,8 @@ class SimulatedSystem(System):
     Simulate a celestial system. Container for Body class. Inherit from System.
     In the simulation next attributes of each body are counted using numerical integration
     with the Euler-Cromer algorithm:
-        v(t + dt) = v(t) + a(t) dt
-        r(t + dt) = r(t) + v(t+dt) dt
+        v(t + dt) = v(t) + a(t)  dt
+        r(t + dt) = r(t) + v(t + dt) dt
 
     Attributes
     ----------
@@ -47,7 +47,7 @@ class SimulatedSystem(System):
 
     def next_iteration(self) -> None:
         """Set new parameter to each body after numerical integration."""
-        new_bodies = []
+        new_bodies: List[Body] = []
         for new_body in map(copy, self.bodies):
             self._euler_cromer(new_body)
             new_bodies.append(new_body)
@@ -58,7 +58,7 @@ class SimulatedSystem(System):
         """Find a convenient radius that suits best for the animation."""
         return log(body.mass, 1.00007) + body.mass ** 0.25
 
-    def _update_plot(self, _, circles: Generator[plt.Circle, None, None]) -> Generator[plt.Circle, None, None]:
+    def _update_plot(self, _, circles: List[plt.Circle]) -> List[plt.Circle]:
         """Update the plot after each iteration."""
         self.next_iteration()
 
