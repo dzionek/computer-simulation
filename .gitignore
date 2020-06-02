@@ -1,1 +1,7 @@
 venv
+.idea/
+decay/__pycache__/
+fractals/__pycache__/
+orbital_motion/__pycache__/
+polynomial/__pycache__/
+traffic/__pycache__/
