@@ -54,7 +54,7 @@ Generating the Mandelbrot Set.
 
 * Generating an animation of Julia Sets of the form  
 ![f1],  
-where alpha is an angle that changes throught the animation.
+where alpha is an angle that changes throughout the animation.
 
 * Better architecture with fractal abstract class.
 
@@ -82,7 +82,7 @@ Type annotations, documentation, validation of all parameters.
 
 ### Uni-required features
 Finding velocity, acceleration, position vectors with the vectorized Euler-Cromer algorithm,
-computing kinetic energy of a system and ensuring it is preserved throught the simulation.
+computing kinetic energy of a system and ensuring it is preserved throughout the simulation.
 
 ### Extra features
 Type annotations, documentation, better visualization and unit tests.
