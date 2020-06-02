@@ -1,5 +1,6 @@
-from fractal import Fractal
 from typing import Tuple
+
+from fractal import Fractal
 
 """
 This module shows my extra work with fractals.

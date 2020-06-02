@@ -1,7 +1,9 @@
-import numpy as np
+from matplotlib import use
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+import numpy as np
 from random import randint
-from matplotlib import animation
 from typing import Union
 
 """
@@ -131,6 +133,7 @@ class Traffic:
 
     def visualize_traffic(self) -> None:
         """Show animation of a traffic for the given model."""
+        use("TkAgg")
 
         fig = plt.figure(2)
 
@@ -144,7 +147,7 @@ class Traffic:
             im.set_array(traffic_array)
             return im,
 
-        ani = animation.FuncAnimation(fig, update_fig, self.iterations, repeat=False, interval=500, blit=True)
+        ani = FuncAnimation(fig, update_fig, self.iterations, repeat=False, interval=500, blit=True)
         plt.xlabel('The road')
         plt.title('Traffic animation (cars are blue)')
         plt.show()

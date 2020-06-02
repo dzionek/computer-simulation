@@ -1,6 +1,4 @@
 from traffic import Traffic
-import matplotlib
-matplotlib.use("TkAgg")
 
 """
 This module runs Traffic simulation.

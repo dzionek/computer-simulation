@@ -1,10 +1,12 @@
-import matplotlib; matplotlib.use("TkAgg")
-from julia import Julia
-from math import e, pi
-import numpy as np
+from matplotlib import use
 from matplotlib.animation import ArtistAnimation
 import matplotlib.pyplot as plt
+
+from math import e, pi
+import numpy as np
 from typing import Tuple, List, Generator
+
+from julia import Julia
 
 """
 This module shows my extra work on animations and Julia sets
@@ -58,6 +60,7 @@ class AnimatedJulia:
 
     def show_animation(self) -> None:
         """Displays the animation in a pop-up. Optionally saves the animation."""
+        use("TkAgg")
         fig = plt.figure()
         ims = self._generate_images()
         ani = ArtistAnimation(fig, ims, interval=50, blit=True)

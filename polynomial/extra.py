@@ -4,7 +4,7 @@ from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 
-from polynomial.poly import Poly
+from poly import Poly
 
 """
 This module shows my extra work with Polynomial exercise.
