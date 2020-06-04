@@ -4,7 +4,7 @@ from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 
-from poly import Poly
+from poly import Poly, Coefficients
 
 """
 This module shows my extra work with Polynomial exercise.
@@ -12,20 +12,20 @@ This module shows my extra work with Polynomial exercise.
 
 class PolyExtra(Poly):
     """Class adds extra features to the basic polynomial class."""
-    def __init__(self, coefs: List[float]) -> None:
+    def __init__(self, coefs: Coefficients) -> None:
         """Initialize polynomial with extra methods."""
         super().__init__(coefs)
 
     def __sub__(self, other: Poly) -> Poly:
         """Return the difference of two polynomials."""
         other_negative_coefs = list(map(lambda x: -x, other.coefs))
-        zipped_list = list(zip_longest(self.coefs, other_negative_coefs, fillvalue=0))
-        new_coefs = list(map(sum, zipped_list))
+        zipped_list = list(zip_longest(self.coefs, other_negative_coefs, fillvalue=0.0))
+        new_coefs: Coefficients = list(map(sum, zipped_list))
         return Poly(new_coefs)
 
     def __mul__(self, other: Poly) -> Poly:
         """Multiply two polynomials."""
-        res = [0] * (self.order() * other.order())
+        res: Coefficients = [0] * (self.order() * other.order())
 
         for i, self_coef in enumerate(self.coefs):
             for j, other_coef in enumerate(other.coefs):
@@ -46,7 +46,7 @@ class PolyExtra(Poly):
         if not (isinstance(val, float) or isinstance(val, int)):
             raise TypeError('The given value is not a real number.')
 
-        res = 0
+        res = 0.0
         for i in range(len(self.coefs)):
             res += self.coefs[i] * val ** i  # in python 0 ** 0 := 1
         return res

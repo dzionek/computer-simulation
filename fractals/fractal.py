@@ -29,7 +29,7 @@ class Fractal(metaclass=ABCMeta):
         self.imaginary_domain = imaginary_domain
 
     @abstractmethod
-    def last_convergent(self, *args, **kwargs):
+    def last_convergent(self, point: complex) -> int:
         """
         The method returns the last number before a sequence turned out to be diverging.
         It differs between Mandelbrot and Julia sets, so is intentionally skipped in the parent class.

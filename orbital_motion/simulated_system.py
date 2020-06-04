@@ -2,7 +2,7 @@ from matplotlib import use
 from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 
-from typing import List
+from typing import List, Any
 import numpy as np
 from copy import copy
 from math import log
@@ -49,6 +49,7 @@ class SimulatedSystem(System):
         """Set new parameter to each body after numerical integration."""
         new_bodies: List[Body] = []
         for new_body in map(copy, self.bodies):
+            assert isinstance(new_body, Body)
             self._euler_cromer(new_body)
             new_bodies.append(new_body)
         self.bodies = np.array(new_bodies)
@@ -58,7 +59,7 @@ class SimulatedSystem(System):
         """Find a convenient radius that suits best for the animation."""
         return log(body.mass, 1.00005) + body.mass ** 0.27
 
-    def _update_plot(self, _, circles: List[plt.Circle]) -> List[plt.Circle]:
+    def _update_plot(self, _: Any, circles: List[plt.Circle]) -> List[plt.Circle]:
         """Update the plot after each iteration."""
         self.next_iteration()
 

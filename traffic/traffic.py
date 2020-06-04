@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation
 
 import numpy as np
 from random import randint
-from typing import Union
+from typing import Union, Optional, Any
 
 """
 This module shows my Traffic Simulation coursework
@@ -49,6 +49,7 @@ class Traffic:
         If it is int it returns the argument. If not, raises an error.
         """
         if isinstance(arg, float):
+            arg = float(arg)  # MyPy issue: https://github.com/python/mypy/issues/6847
             if arg.is_integer():
                 arg = int(arg)
 
@@ -104,7 +105,7 @@ class Traffic:
 
         return average_velocity
 
-    def find_equilibrium(self) -> float:
+    def find_equilibrium(self) -> Optional[float]:
         """Find the steady state average speed."""
         speed = None
         for _ in range(len(self.road)):
@@ -141,7 +142,7 @@ class Traffic:
         traffic_array = np.array([self.road, ] * 10)
         im = plt.imshow(traffic_array, animated=True, cmap='Blues', interpolation='none')
 
-        def update_fig(*args):
+        def update_fig(*args: Any) -> plt.imshow:
             self._one_iteration()
             traffic_array = np.array([self.road, ] * 10)
             im.set_array(traffic_array)

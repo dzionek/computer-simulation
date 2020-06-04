@@ -17,7 +17,7 @@ class Mandelbrot(Fractal):
         Return the last element of a sequence before it has turned out to be diverging.
         If the given iteration_limit has been exceeded, it returns this limit.
         """
-        z = 0
+        z = complex(0, 0)
         for iterator in range(self.iteration_limit):
             z = z * z + point
             if abs(z) > 2:

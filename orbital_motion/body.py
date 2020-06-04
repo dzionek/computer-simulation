@@ -28,30 +28,31 @@ class Body:
     def __init__(self, mass: float, color: str, position: Vector, velocity: Vector,
                  acceleration: Vector, force: Vector) -> None:
         """Initialize celestial body within positioning system."""
-        self.mass: float = mass
-        self.color: str = color
-        self.position: Vector = np.array(position)
-        self.velocity: Vector = np.array(velocity)
+        self.mass = mass
+        self.color = color
+        self.position = np.array(position)
+        self.velocity = np.array(velocity)
 
-        self.acceleration: Vector = np.array(acceleration)
-        self.force: Vector = np.array(force)
+        self.acceleration = np.array(acceleration)
+        self.force = np.array(force)
 
     @property
     def kinetic_energy(self) -> float:
         """Kinetic energy of the body."""
-        return 0.5 * self.mass * np.linalg.norm(self.velocity)**2
+        velocity: float = np.linalg.norm(self.velocity)
+        return 0.5 * self.mass * velocity**2
 
     def __repr__(self) -> str:
         """Visual representation of a body instance."""
         return f'Body with mass {self.mass}, position {self.position}, and velocity {self.velocity}'
 
-    def __eq__(self, other: 'Body') -> bool:
+    def __eq__(self, other: object) -> bool:
         """
         Two bodies are equal when they have the same mass.
         This condition is sufficient in our simulation.
         """
-        return self.mass == other.mass
+        return self.mass == other.mass if isinstance(other, Body) else False
 
-    def __ne__(self, other: 'Body') -> bool:
+    def __ne__(self, other: object) -> bool:
         """Opposite of __eq__."""
-        return self.mass != other.mass
+        return self.mass != other.mass if isinstance(other, Body) else False

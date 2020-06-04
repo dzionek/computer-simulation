@@ -11,7 +11,7 @@ def main() -> None:
     elif i == 3:
         plot_animation()
 
-def prompt():
+def prompt() -> int:
     print("""Menu:
 1 - Display Mandelbrot set.
 2 - Display Julia Set

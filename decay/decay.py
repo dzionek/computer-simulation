@@ -47,7 +47,7 @@ class Decay:
     def find_half_time(self) -> float:
         """Perform decay iterations until half-time is found, then return half-time."""
         timestep = self.timestep
-        half_time = 0
+        half_time = 0.0
 
         while self.decayed_nuclei < self.undecayed_nuclei:
             self._decay_iteration()

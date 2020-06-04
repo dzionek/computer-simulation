@@ -1,10 +1,12 @@
 from itertools import zip_longest
-from typing import List
+from typing import List, Any, Union
 
 """
 This module contains my polynomial coursework
 for Computer Simulation 2020.
 """
+
+Coefficients = List[Union[float, int]]
 
 class Poly:
     """
@@ -14,7 +16,7 @@ class Poly:
             e.g. 1.3 - 2x^2 + 3x^3 has the list coefficient [1.3, 0, -2, 3].
     """
 
-    def __init__(self, coefs: List[float]) -> None:
+    def __init__(self, coefs: Coefficients) -> None:
         """Instantiate poly instance, validates the given parameter."""
         if self._validate_input(coefs):
             coefs = self._remove_leading_zeros(coefs)
@@ -23,7 +25,7 @@ class Poly:
             raise TypeError("Invalid input")
 
     @staticmethod
-    def _validate_input(args: List[float]) -> bool:
+    def _validate_input(args: Any) -> bool:
         """Check if the argument is a nonempty list of real numbers."""
         return (args and isinstance(args, list)
                 and all([
@@ -33,7 +35,7 @@ class Poly:
                 ]))
 
     @staticmethod
-    def _remove_leading_zeros(lst: List[float]) -> List[float]:
+    def _remove_leading_zeros(lst: Coefficients) -> Coefficients:
         """Removes all leading zeros of the list"""
         if not any(map(bool, lst)):
             raise TypeError('Zero polynomial')
@@ -49,8 +51,8 @@ class Poly:
 
     def __add__(self, other: 'Poly') -> 'Poly':
         """Return the sum of two polynomials."""
-        zipped_list = list(zip_longest(self.coefs, other.coefs, fillvalue=0))
-        new_coefs = list(map(sum, zipped_list))
+        zipped_list = list(zip_longest(self.coefs, other.coefs, fillvalue=0.0))
+        new_coefs: Coefficients = list(map(sum, zipped_list))
         return Poly(new_coefs)
 
     def derivative(self) -> 'Poly':
@@ -93,6 +95,6 @@ class Poly:
 
         return exp_one_coefs[1:-1]
 
-    def __eq__(self, o: 'Poly') -> bool:
+    def __eq__(self, other: object) -> bool:
         """Two polynomials are equal if their coefficients are equal."""
-        return self.coefs == o.coefs
+        return self.coefs == other.coefs if isinstance(other, Poly) else False

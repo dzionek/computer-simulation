@@ -92,24 +92,24 @@ The script was primary to visualize a planet and its moons. However, it can be u
 1) Add necessary constants in *sim_constants.py*
 ```python
 # Parameters for body X
-X_MASS: Final[float] = 4e18
-X_COLOR: Final[str] = 'b'
-X_INIT_POS: Final[Vector] = (2e7, -1e7)
-X_INIT_VEL: Final[Vector] = (1e3, 1e3)
-X_INIT_ACC: Final[Vector] = (0.0, 0.0)
-X_INIT_FORCE: Final[Vector] = (0.0, 0.0)
+X_MASS: Final = 4e18
+X_COLOR: Final = 'b'
+X_INIT_POS: Final = (2e7, -1e7)
+X_INIT_VEL: Final = (1e3, 1e3)
+X_INIT_ACC: Final = (0.0, 0.0)
+X_INIT_FORCE: Final = (0.0, 0.0)
 ```
 
 2) Alternatively, if your body is a moon of a planet (let's say planet X), you can find necessary parameters with
 ```python
 # Parameters for moon Y
-Y_MASS: Final[float] = 1.8e15
-Y_COLOR: Final[str] = 'w'
-Y_RADIUS: Final[float] = 23.463e6
-Y_INIT_POS: Final[Vector] = (Y_RADIUS, 0.0)
-Y_INIT_VEL: Final[Vector] = (0.0, _find_moon_total_velocity(X_MASS, Y_RADIUS))
-Y_INIT_ACC: Final[Vector] = (0.0, 0.0)
-Y_INIT_FORCE: Final[Vector] = (0.0, 0.0)
+Y_MASS: Final = 1.8e15
+Y_COLOR: Final = 'w'
+Y_RADIUS: Final = 23.463e6
+Y_INIT_POS: Final = (Y_RADIUS, 0.0)
+Y_INIT_VEL: Final = (0.0, _find_moon_total_velocity(X_MASS, Y_RADIUS))
+Y_INIT_ACC: Final= (0.0, 0.0)
+Y_INIT_FORCE: Final = (0.0, 0.0)
 ```
 where Y_RADIUS is the orbital radius of Y on the orbit around X.
 

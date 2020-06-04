@@ -15,7 +15,7 @@ class System:
     """
     def __init__(self, *bodies: Body) -> None:
         """Initialize the system."""
-        self.bodies: ndarray = array(bodies)
+        self.bodies = array(bodies)
 
     @property
     def total_kinetic_energy(self) -> float:
