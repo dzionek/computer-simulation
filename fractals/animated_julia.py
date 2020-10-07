@@ -65,9 +65,9 @@ class AnimatedJulia:
         ims = self._generate_images()
         ani = ArtistAnimation(fig, ims, interval=50, blit=True)
 
-        # should_save = input('Press 1 to save the animation.')
-        # if should_save == '1':
-        #     ani.save('julia_sets.mp4', writer="ffmpeg")
+        should_save = input('Do you want to save the animation? [Y/N]\n')
+        if should_save == 'y' or should_save == 'Y':
+            ani.save('julia_sets.mp4', writer="ffmpeg")
 
         plt.title(f'Animated Julia sets with c = {self.anim_constant}*e^(i*a)')
         plt.show()
